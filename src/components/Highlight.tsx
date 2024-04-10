@@ -7,7 +7,7 @@ type HighlightProps = {
 
 export function Highlight({ title, subtitle }: HighlightProps) {
   return (
-    <View className="w-full">
+    <View className="w-full mb-4">
       <Text className="text-center text-xl font-semibold text-white">
         {title}
       </Text>
