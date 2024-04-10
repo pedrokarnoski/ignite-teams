@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       <Groups />
-      <StatusBar style="light" />
+      <StatusBar style="dark" translucent />
     </>
   );
 }

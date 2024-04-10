@@ -1,9 +1,11 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
+
+import { Header } from "@/components/Header";
 
 export function Groups() {
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text className="font-semibold font-">Groups</Text>
+    <View className="flex-1 bg-gray-800">
+      <Header showBackButton />
     </View>
   );
 }
