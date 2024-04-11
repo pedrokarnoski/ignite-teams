@@ -1,8 +1,10 @@
 export const colors = {
   white: "#FFFFFF",
 
-  red: "#F75A68",
-  'red-dark': "#AA2834",
+  red: {
+    500: "#F75A68",
+    700: "#AA2834",
+  },
 
   green: {
     700: "#00875F",

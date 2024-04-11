@@ -14,7 +14,7 @@ type ButtonProps = TouchableOpacityProps & {
 
 const variants = {
   PRIMARY: "bg-green-700",
-  SECONDARY: "bg-red-dark",
+  SECONDARY: "bg-red-700",
 };
 
 export function Button({ type = "PRIMARY", title, ...rest }: ButtonProps) {
