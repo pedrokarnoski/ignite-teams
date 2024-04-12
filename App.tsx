@@ -9,9 +9,9 @@ import "@/styles/global.css";
 export default function App() {
   return (
     <>
-      {/* <Groups /> */}
+      <Groups />
       {/* <NewGroup /> */}
-      <Players />
+      {/* <Players /> */}
       <StatusBar style="light" translucent />
     </>
   );
