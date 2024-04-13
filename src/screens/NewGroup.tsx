@@ -1,14 +1,25 @@
 import { View } from "react-native";
 
-import { Header } from "@/components/Header";
+import { useNavigation } from "@react-navigation/native";
 
 import { FontAwesome6 } from "@expo/vector-icons";
-import { colors } from "@/styles/colors";
+
+import { Header } from "@/components/Header";
 import { Highlight } from "@/components/Highlight";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 
+import { colors } from "@/styles/colors";
+
 export function NewGroup() {
+  const navigation = useNavigation();
+
+  function handleNew() {
+    navigation.navigate("Players", {
+      Group: 'Rocket'
+    });
+  }
+
   return (
     <View className="flex-1 bg-gray-600 p-6">
       <Header showBackButton />
@@ -27,7 +38,7 @@ export function NewGroup() {
 
         <Input />
 
-        <Button title="Criar" />
+        <Button title="Criar" onPress={handleNew} />
       </View>
     </View>
   );
