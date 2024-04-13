@@ -1,16 +1,25 @@
+import { useState } from "react";
 import { View, FlatList, Text } from "react-native";
+
+import { useRoute } from "@react-navigation/native";
 
 import { Header } from "@/components/Header";
 import { Highlight } from "@/components/Highlight";
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { Input } from "@/components/Input";
 import { Filter } from "@/components/Filter";
-import { useState } from "react";
 import { PlayerCard } from "@/components/PlayerCard";
 import { ListEmpty } from "@/components/ListEmpty";
 import { Button } from "@/components/Button";
 
+type RouteParams = {
+  Group: string;
+};
+
 export function Players() {
+  const route = useRoute();
+  const { Group } = route.params as RouteParams;
+
   const [teamSelected, setTeamSelected] = useState("Time A");
   const [players, setPlayers] = useState([]);
 
@@ -20,7 +29,7 @@ export function Players() {
 
       <View className="gap-6">
         <Highlight
-          title="Nome da turma"
+          title={Group}
           subtitle="adicione a galera e separe os times"
         />
 
