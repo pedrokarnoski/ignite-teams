@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { View } from "react-native";
 
+import { groupCreate } from "@/storage/group/groupCreate";
+
 import { useNavigation } from "@react-navigation/native";
 
 import { FontAwesome6 } from "@expo/vector-icons";
@@ -17,7 +19,13 @@ export function NewGroup() {
 
   const navigation = useNavigation();
 
-  function handleNew() {
+  async function handleNew() {
+    try {
+      await groupCreate(group);
+    } catch (err) {
+      console.error(err);
+    }
+
     navigation.navigate("Players", {
       Group: group,
     });
