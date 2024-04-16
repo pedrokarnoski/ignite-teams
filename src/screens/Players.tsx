@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { View, FlatList, Text } from "react-native";
+import { View, FlatList, Text, Alert } from "react-native";
 
 import { useRoute } from "@react-navigation/native";
+
+import { AppError } from "@/utils/AppError";
 
 import { Header } from "@/components/Header";
 import { Highlight } from "@/components/Highlight";
@@ -11,6 +13,9 @@ import { Filter } from "@/components/Filter";
 import { PlayerCard } from "@/components/PlayerCard";
 import { ListEmpty } from "@/components/ListEmpty";
 import { Button } from "@/components/Button";
+
+import { playersAddByGroup } from "@/storage/player/playersAddByGroup";
+import { playersGetByGroup } from "@/storage/player/playersGetByGroup";
 
 type RouteParams = {
   Group: string;
@@ -22,6 +27,31 @@ export function Players() {
 
   const [teamSelected, setTeamSelected] = useState("Time A");
   const [players, setPlayers] = useState([]);
+  const [newPlayerName, setNewPlayerName] = useState("");
+
+  async function handleAddPlayer() {
+    if (newPlayerName.trim().length === 0) {
+      return Alert.alert("Novo jogador", "Informe o nome do jogador.");
+    }
+
+    const newPlayer = {
+      name: newPlayerName,
+      team: teamSelected,
+    };
+
+    try {
+      await playersAddByGroup(newPlayer, Group);
+
+      const players = await playersGetByGroup(Group);
+      console.log(players);
+    } catch (err) {
+      if (err instanceof AppError) {
+        Alert.alert("Novo jogador", err.message);
+      } else {
+        Alert.alert("Novo jogador", "Não foi possível adicionar.");
+      }
+    }
+  }
 
   return (
     <View className="flex-1 bg-gray-600 p-6">
@@ -34,8 +64,12 @@ export function Players() {
         />
 
         <View className="w-full bg-gray-700 flex-row justify-between rounded-md">
-          <Input placeholder="Nome da pessoa" autoCorrect={false} />
-          <ButtonIcon icon="add" />
+          <Input
+            placeholder="Nome da pessoa"
+            autoCorrect={false}
+            onChangeText={setNewPlayerName}
+          />
+          <ButtonIcon icon="add" onPress={handleAddPlayer} />
         </View>
       </View>
 
